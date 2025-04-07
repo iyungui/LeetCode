@@ -1,11 +1,12 @@
 class Solution {
     func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
-        let n = nums.count
-        for i in 0..<n {
-            for j in i+1..<n {
-                if nums[i] + nums[j] == target {
-                    return [i, j]
-                }
+        var dict = [Int: Int]()
+
+        for (index, value) in nums.enumerated() {
+            if let addent = dict[value] {
+                return [addent, index]
+            } else {
+                dict[target - value] = index
             }
         }
         return []
