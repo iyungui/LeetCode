@@ -1,19 +1,18 @@
 class Solution {
     func convert(_ s: String, _ numRows: Int) -> String {
         if numRows == 1 { return s }
-        
-        var res: String = ""
+        let increment: Int = 2 * (numRows - 1)
         let s = Array(s)
-        let jump: Int = (numRows - 1) * 2
-        for row in 0..<numRows {
-            for i in stride(from: row, to: s.count, by: jump) {
+        var res: String = ""
+        for r in 0..<numRows {
+            for i in stride(from: r, to: s.count, by: increment) {
                 res += String(s[i])
-                if row > 0 && row < numRows - 1 && (i + jump - row * 2 < s.count) {
-                    res += String(s[i + jump - row * 2])
-                } 
+                if r > 0 && r < numRows - 1 && i + increment - 2 * r < s.count {
+                    res += String(s[i + increment - 2 * r])
+                }
             }
         }
-
+        
         return res
     }
 }
