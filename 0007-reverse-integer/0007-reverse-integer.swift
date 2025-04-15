@@ -1,19 +1,11 @@
 class Solution {
     func reverse(_ x: Int) -> Int {
-        let isNegative = x < 0
-        var digits = Array(String(abs(x)))
-        digits.reverse()
-        let reversedDigits = String(digits)
-
-        if let num = Int(reversedDigits) {
-            let result = isNegative ? -num : num
-
-            if result > Int32.max || result < Int32.min {
-                return 0
-            }
-            return result
-        } else {
-            return 0
+        var r = 0, x = x
+        while x != 0 {
+            r = r * 10
+            r = r + (x % 10)
+            x /= 10
         }
+        return r < Int32.min || r > Int32.max ? 0 : r
     }
 }
