@@ -1,5 +1,6 @@
 class Solution {
     func maxProfit(_ prices: [Int]) -> Int {
+        guard prices.count >= 2 else { return 0 }
         var l = 0, r = 1    // l: buy, r: sell
         var maxP = 0
         while r < prices.count {
