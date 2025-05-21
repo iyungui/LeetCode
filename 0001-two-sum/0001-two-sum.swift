@@ -1,12 +1,17 @@
 class Solution {
     func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
-        var dict: [Int: Int] = [:]
-        for (index, value) in nums.enumerated() {
-            if let addcent = dict[value] {
-                return [addcent, index]
-            } else {
-                dict[target - value] = index
+        let sortedNums = nums.sorted()
+        var l = 0, r = nums.count - 1
+        while l < r {
+            let sum = sortedNums[l] + sortedNums[r]
+            if sum == target {
+                if let idx1 = nums.firstIndex(of: sortedNums[l]),
+                   let idx2 = nums.lastIndex(of: sortedNums[r]) {
+                    return [idx1, idx2]
+                }
             }
+            else if sum < target { l += 1 }
+            else { r -= 1 }
         }
         return []
     }
