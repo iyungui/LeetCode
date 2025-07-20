@@ -1,12 +1,16 @@
 class Solution {
     func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
-        let n = nums.count
-        for i in 0..<n {
-            for j in i + 1..<n {
-                if nums[i] + nums[j] == target {
-                    return [i, j]
-                }
+        var dict = [Int: Int]()
+
+        for (idx, val) in nums.enumerated() {
+            let complement = target - val   // 9 - 2 = 7
+
+            if let complementIdx = dict[complement] {   // complementIdx = 0
+                return [complementIdx, idx]
             }
+
+            // store 2: 0
+            dict[val] = idx
         }
 
         return []
