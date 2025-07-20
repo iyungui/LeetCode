@@ -1,18 +1,14 @@
 class Solution {
     func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
-        let sortedNums = nums.sorted()
-        var l = 0, r = nums.count - 1
-        while l < r {
-            let sum = sortedNums[l] + sortedNums[r]
-            if sum == target {
-                if let idx1 = nums.firstIndex(of: sortedNums[l]),
-                   let idx2 = nums.lastIndex(of: sortedNums[r]) {
-                    return [idx1, idx2]
+        let n = nums.count
+        for i in 0..<n {
+            for j in i + 1..<n {
+                if nums[i] + nums[j] == target {
+                    return [i, j]
                 }
             }
-            else if sum < target { l += 1 }
-            else { r -= 1 }
         }
+
         return []
     }
 }
