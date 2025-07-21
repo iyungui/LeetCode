@@ -1,18 +1,25 @@
 class Solution {
     func maxProfit(_ prices: [Int]) -> Int {
-        guard prices.count >= 2 else { return 0 }
-        var l = 0, r = 1    // l: buy, r: sell
-        var maxP = 0
-        while r < prices.count {
-            // profitable?
-            if prices[l] < prices[r] {
-                let profit = prices[r] - prices[l]
-                maxP = max(maxP, profit)
+        var left = 0, right = 1
+        let n = prices.count
+        var maxProfit = 0
+        while right < n {
+            if prices[left] <= prices[right] {
+                let diff = prices[right] - prices[left]
+                
+                // update profit
+                if maxProfit < diff {
+                    maxProfit = diff
+                }
+
             } else {
-                l = r
+                // update pointer because it doesn't need to buy at higher day
+                left = right
             }
-            r += 1
+
+            right += 1
         }
-        return maxP
+
+        return maxProfit
     }
 }
