@@ -1,9 +1,9 @@
 class Solution {
     func containsDuplicate(_ nums: [Int]) -> Bool {
-        var dict: [Int: Int] = [:]
+        var seen = Set<Int>()
+
         for num in nums {
-            if dict[num] != nil { return true }
-            dict[num, default: 0] = 1
+            if !seen.insert(num).inserted { return true }
         }
         return false
     }
