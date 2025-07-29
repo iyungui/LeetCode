@@ -19,7 +19,7 @@ class Solution {
 
         var maxDepth = 0
 
-        var stack: [(node: Int, depth: Int)] = [(root, 1)]
+        var stack: [(node: TreeNode, depth: Int)] = [(root, 1)]
 
         while !stack.isEmpty {
             let last = stack.removeLast()
