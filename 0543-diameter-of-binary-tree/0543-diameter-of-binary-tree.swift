@@ -20,8 +20,6 @@ class Solution {
         func depth(_ node: TreeNode?) -> Int {
             guard let node = node else { return 0 }
             
-            
-
             let leftDepth = depth(node.left)
             let rightDepth = depth(node.right)
 
@@ -29,9 +27,7 @@ class Solution {
             maxDiameter = max(maxDiameter, leftDepth + rightDepth)
 
             // Return the depth of this subtree
-            let result = max(leftDepth, rightDepth) + 1
-            print("node: \(node.val), result: \(result)")
-            return result
+            return max(leftDepth, rightDepth) + 1
         }
 
         depth(root)
