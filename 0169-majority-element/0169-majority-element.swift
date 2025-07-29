@@ -1,15 +1,19 @@
 class Solution {
     func majorityElement(_ nums: [Int]) -> Int {
-        var dict: [Int: Int] = [:]
-
+        var candidate = 0
+        var cnt = 0
+        
         for num in nums {
-            dict[num, default: 0] += 1
-
-            if dict[num]! > nums.count / 2 {
-                return num
+            if cnt == 0 {
+                candidate = num
+                cnt = 1
+            } else if num == candidate {
+                cnt += 1
+            } else {
+                cnt -= 1
             }
         }
 
-        return -1
+        return candidate
     }
 }
