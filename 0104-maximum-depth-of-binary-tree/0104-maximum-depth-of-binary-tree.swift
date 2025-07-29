@@ -17,13 +17,22 @@ class Solution {
     func maxDepth(_ root: TreeNode?) -> Int {
         guard let root = root else { return 0 }
 
-        if root.left == nil && root.right == nil {
-            return 1
+        var maxDepth = 0
+
+        var stack: [(node: Int, depth: Int)] = [(root, 1)]
+
+        while !stack.isEmpty {
+            let last = stack.removeLast()
+            let depth = last.depth
+            maxDepth = max(maxDepth, depth)
+            if let left = last.node.left {
+                stack.append((left, depth + 1))
+            }
+            if let right = last.node.right {
+                stack.append((right, depth + 1))
+            }
         }
 
-        let leftDepth = maxDepth(root.left)
-        let rightDepth = maxDepth(root.right)
-
-        return max(leftDepth, rightDepth) + 1
+        return maxDepth
     }
 }
