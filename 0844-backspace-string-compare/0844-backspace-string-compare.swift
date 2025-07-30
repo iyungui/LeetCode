@@ -1,8 +1,6 @@
 class Solution {
     func backspaceCompare(_ s: String, _ t: String) -> Bool {
-        let stk1 = go(s)
-        let stk2 = go(t)
-        return stk1 == stk2
+        return go(s) == go(t)
     }
 
     func go(_ s: String) -> Array<Character> {
@@ -15,7 +13,6 @@ class Solution {
                 stk.append(ch)
             }
         }
-        print("stk: \(stk)")
         return stk
     }
 }
