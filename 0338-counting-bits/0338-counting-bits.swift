@@ -1,11 +1,9 @@
 class Solution {
     func countBits(_ n: Int) -> [Int] {
-        var ret: [Int] = []
-        for i in 0...n {
-            let s = String(i, radix: 2)
-            ret.append(s.filter { $0 == "1" }.count)
+        var ans = [Int](repeating: 0, count: n + 1)
+        for i in 1...n {
+            ans[i] = ans[i >> 1] + (i & 1)
         }
-
-        return ret
+        return ans 
     }
 }
