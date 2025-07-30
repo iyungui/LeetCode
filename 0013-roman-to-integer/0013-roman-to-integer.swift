@@ -13,10 +13,13 @@ class Solution {
         var ret = 0
         var s = Array(s)
         for i in 0..<s.count {
-            if i + 1 < s.count && roman[s[i]]! < roman[s[i + 1]]! {
-                ret -= roman[s[i]]!
+            let cur: Int = roman[s[i]]!
+            if i + 1 < s.count {
+                let next: Int = roman[s[i + 1]]!
+                if cur < next { ret -= cur }
+                else { ret += cur }
             } else {
-                ret += roman[s[i]]!
+                ret += cur
             }
         }
 
