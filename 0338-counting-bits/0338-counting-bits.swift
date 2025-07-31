@@ -1,10 +1,23 @@
 class Solution {
     func countBits(_ n: Int) -> [Int] {
-        if n == 0 { return [0] }
-        var ans = [Int](repeating: 0, count: n + 1)
-        for i in 1...n {
-            ans[i] = ans[i >> 1] + (i & 1)
+        var result = [Int]()
+        
+        for i in 0...n {
+            result.append(countOnes(i))
         }
-        return ans 
+        
+        return result
+    }
+    
+    private func countOnes(_ num: Int) -> Int {
+        var count = 0
+        var n = num
+        
+        while n > 0 {
+            count += n & 1
+            n >>= 1
+        }
+        
+        return count
     }
 }
