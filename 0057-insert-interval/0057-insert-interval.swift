@@ -2,27 +2,25 @@ class Solution {
     func insert(_ intervals: [[Int]], _ newInterval: [Int]) -> [[Int]] {
         guard !intervals.isEmpty else { return [newInterval] }
         guard !newInterval.isEmpty else { return intervals }
-
+        var new = newInterval
         var res: [[Int]] = []
-        var newInterval = newInterval
-
         for i in 0..<intervals.count {
-            // Case 1: newInterval comes before current interval (no overlap)
-            if newInterval[1] < intervals[i][0] {
-                res.append(newInterval)
+            // Case1: newInterval comes before current intervals
+            if intervals[i][0] > new[1] {
+                res.append(new)
                 return res + Array(intervals[i...])
             }
-            // Case 2: newInterval comes after current interval (no overlap)
-            else if newInterval[0] > intervals[i][1] {
+            // Case2: newInterval comes after current intervals
+            else if intervals[i][1] < new[0] {
                 res.append(intervals[i])
             }
-            // Case 3: overlapping intervals - merge them
+            // Case3: opverlaps (merge them)
             else {
-                newInterval = [min(newInterval[0], intervals[i][0]), 
-                              max(newInterval[1], intervals[i][1])]
+                new = [min(intervals[i][0], new[0]),
+                       max(intervals[i][1], new[1])]
             }
         }
-        res.append(newInterval)
+        res.append(new)
         return res
     }
 }
