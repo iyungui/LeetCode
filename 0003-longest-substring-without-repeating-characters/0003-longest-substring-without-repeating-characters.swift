@@ -1,15 +1,13 @@
 class Solution {
     func lengthOfLongestSubstring(_ s: String) -> Int {
-        var l = 0, res = 0
-        var charSet = Set<Character>()
-        var s = Array(s)
-        for r in 0..<s.count {
-            while charSet.contains(s[r]) {
-                charSet.remove(s[l])
-                l += 1
+        var startIndex = 0, res = 0
+        var map: [Character: Int] = [:]
+        for (index, char) in s.enumerated() {
+            if let foundIndex = map[char] {
+                startIndex = max(foundIndex + 1, startIndex)
             }
-            charSet.insert(s[r])
-            res = max(res, r - l + 1)
+            res = max(res, index - startIndex + 1)
+            map[char] = index
         }
         return res
     }
