@@ -1,23 +1,26 @@
 class Solution {
     func threeSum(_ nums: [Int]) -> [[Int]] {
-        let sortedNums = nums.sorted()
-        var result = Set<[Int]>()
-
-        for i in 0..<sortedNums.count {
-            var j = i + 1
-            var k = sortedNums.count - 1
-            while j < k {
-                let sum = sortedNums[i] + sortedNums[j] + sortedNums[k]
-                if sum == 0 {
-                    result.insert([sortedNums[i], sortedNums[j], sortedNums[k]])
-                    j += 1
-                    k -= 1
-                } else if sum < 0 {
-                    j += 1
-                } else { k -= 1 }
+        let nums = nums.sorted()
+        var ret: [[Int]] = []
+        for i in 0..<nums.count {
+            if i > 0 && nums[i] == nums[i - 1] { continue }
+            let target = -nums[i]
+            var left = i + 1, right = nums.count - 1
+            while left < right {
+                let curSum = nums[left] + nums[right]
+                if curSum == target {
+                    ret.append([nums[i], nums[left], nums[right]])
+                    while left < right && nums[left] == nums[left + 1] { left += 1 }
+                    while left < right && nums[right] == nums[right - 1] { right -= 1 }
+                    left += 1
+                    right -= 1
+                } else if curSum < target {
+                    left += 1
+                } else {
+                    right -= 1
+                }
             }
         }
-
-        return Array(result)
+        return ret
     }
 }
