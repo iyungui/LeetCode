@@ -1,18 +1,23 @@
 class Solution {
     func isValid(_ s: String) -> Bool {
-        var stack: [Character] = []
-        let pairs: [Character: Character] = [")": "(", "]" : "[", "}": "{"]
+        // Early return for odd length strings
+        guard s.count % 2 == 0 else { return false }
 
-        for char in s {
-            // char: ), ], } (It's an closing bracket)
-            if let openBracket = pairs[char] {
-                if stack.isEmpty || stack.removeLast() != openBracket { return false }
-            } else {
+        var stk: [Character] = []
+
+        for ch in s {
+            switch ch {
                 // It's an opening bracket
-                stack.append(char)
+                case "(": stk.append(")")
+                case "[": stk.append("]")
+                case "{": stk.append("}")
+
+                // It's an closing bracket
+                default:
+                    if stk.isEmpty || stk.removeLast() != ch { return false }
             }
         }
 
-        return stack.isEmpty
+        return stk.isEmpty
     }
 }
