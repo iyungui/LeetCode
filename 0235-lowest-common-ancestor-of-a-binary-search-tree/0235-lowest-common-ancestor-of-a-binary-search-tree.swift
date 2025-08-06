@@ -19,18 +19,11 @@ class Solution {
         var current = root
 
         while true {
-            // p와 q가 모두 현재 노드보다 작으면 왼쪽으로
             if p.val < current.val && q.val < current.val {
                 current = current.left!
-            }
-
-            // p와 q가 모두 현재 노드보다 크면 오른쪽으로
-            else if p.val > current.val && q.val > current.val {
+            } else if p.val > current.val && q.val > current.val {
                 current = current.right!
-            }
-
-            // 그렇지 않으면 현재 노드가 LCA
-            else {
+            } else {
                 return current
             }
         }
