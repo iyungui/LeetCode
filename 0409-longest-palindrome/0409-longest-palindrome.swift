@@ -1,10 +1,7 @@
 class Solution {
     func longestPalindrome(_ s: String) -> Int {
-        var dict: [Character: Int] = [:]
+        let dict: [Character: Int] = s.reduce(into: [:], { $0[$1, default: 0] += 1 })
 
-        for ch in s {
-            dict[ch, default: 0] += 1
-        }
 
         var length = 0
         var hasOdd = false
